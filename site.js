@@ -1,0 +1,10 @@
+const generator = document.getElementById("questionGenerator");
+if (generator) {
+  const questionSets = {
+    general:["Tell me about yourself and why you are interested in this role.","Describe a time you solved a difficult problem.","Tell me about a time you worked with someone who had a different opinion.","What is one skill you are actively improving?","What would success in this role look like after six months?"],
+    software:["Walk me through a project you built and the decisions you made.","How would you debug a feature that works for some users but fails for others?","Tell me about a technical challenge that took longer than expected.","How do you test your code before sharing it?","Explain a technical concept from your work to a non-technical person."],
+    data:["Describe an analysis that changed a decision or recommendation.","How do you check whether data is accurate before using it?","Tell me about a time you explained data to a non-technical audience.","How would you choose the right metric for a business question?","Describe a data-cleaning challenge you handled."],
+    business:["Tell me about a project you planned from start to finish.","How do you handle two stakeholders who want different outcomes?","Describe a time you improved a process.","How do you decide which work to prioritise?","Tell me about a time a project did not go as planned."]
+  };
+  generator.addEventListener("click",()=>{const role=document.getElementById("role").value,level=document.getElementById("level").value,questions=[...questionSets[role]];if(level==="fresher")questions.push("Tell me about a college project, course, or activity that shows you can learn quickly.");if(level==="experienced")questions.push("Tell me about a time you influenced a decision or mentored another person.");const list=document.getElementById("generatedQuestions");list.replaceChildren();questions.forEach(question=>{const item=document.createElement("li");item.textContent=question;list.append(item);});});
+}
