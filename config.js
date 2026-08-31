@@ -1,9 +1,5 @@
-// Add your own payment, booking, WhatsApp, or email link here once you are ready to sell a service.
-// Example: "https://wa.me/91XXXXXXXXXX" or a payment-provider checkout link.
 window.CAREER_MATCH_CONFIG = {
-  personalisedHelpUrl: "pratyushkhare786@gmail.com",
-  // Optional: paste a Google Form, WhatsApp, or email link to collect feedback.
-  feedbackUrl: "pratyushkhare786@gmail.com",
-  // Optional: add an email or social profile link for people who want to contact you.
+  personalisedHelpUrl: "mailto:pratyushkhare786@gmail.com?subject=CareerMatch%20personalised%20help",
+  feedbackUrl: "mailto:pratyushkhare786@gmail.com?subject=CareerMatch%20feedback",
   contactUrl: "mailto:pratyushkhare786@gmail.com"
 };
