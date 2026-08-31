@@ -5,5 +5,5 @@ window.CAREER_MATCH_CONFIG = {
   // Optional: paste a Google Form, WhatsApp, or email link to collect feedback.
   feedbackUrl: "pratyushkhare786@gmail.com",
   // Optional: add an email or social profile link for people who want to contact you.
-  contactUrl: "pratyushkhare786@gmail.com"
+  contactUrl: "mailto:pratyushkhare786@gmail.com"
 };
