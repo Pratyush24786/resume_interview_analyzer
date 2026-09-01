@@ -541,3 +541,58 @@ if (contactUrl && $("contactLink")) {
   $("contactLink").href = contactUrl;
   $("contactLink").classList.remove("hidden");
 }
+
+/* =========================================================
+   LINKEDIN SCORE SHARING
+   ========================================================= */
+
+if ($("shareLinkedIn")) {
+  $("shareLinkedIn").addEventListener("click", async () => {
+    const score = $("matchScore")?.textContent?.trim() || "—";
+
+    const shareUrl =
+      "https://resume-interview-analyzer.pratyushk824-786.workers.dev/?utm_source=linkedin&utm_medium=social&utm_campaign=score_share";
+
+    const shareText =
+      score === "—"
+        ? "I just analyzed my resume with CareerMatch — a free resume and ATS analyzer."
+        : `I just checked my resume with CareerMatch and got a ${score} job match score! Check yours for free:`;
+
+    /*
+     * Copy a ready-to-use message so the user can paste it
+     * into their LinkedIn post.
+     */
+    try {
+      await navigator.clipboard.writeText(
+        `${shareText}\n${shareUrl}`
+      );
+
+      $("shareLinkedIn").textContent =
+        "Copied! Opening LinkedIn…";
+    } catch (error) {
+      console.warn("Could not copy share text:", error);
+
+      $("shareLinkedIn").textContent =
+        "Opening LinkedIn…";
+    }
+
+    /*
+     * Open LinkedIn's official sharing flow.
+     */
+    const linkedInUrl =
+      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+        shareUrl
+      )}`;
+
+    window.open(
+      linkedInUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    setTimeout(() => {
+      $("shareLinkedIn").textContent =
+        "Share my score on LinkedIn ↗";
+    }, 2500);
+  });
+}
