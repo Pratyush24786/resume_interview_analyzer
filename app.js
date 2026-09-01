@@ -343,17 +343,141 @@ $("startOver").addEventListener("click", () => {
 
 $("printReport").addEventListener("click", () => window.print());
 
+function getScoreCardData() {
+  const score = $("matchScore").textContent.trim();
+  const name = $("candidateName").textContent.trim();
+
+  if (!score || score === "—") {
+    throw new Error(
+      "Add a job description first so CareerMatch can create your score card."
+    );
+  }
+
+  return { score, name };
+}
+
+async function createScoreCardBlob() {
+  const { score, name } = getScoreCardData();
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 1200;
+  canvas.height = 627;
+
+  const ctx = canvas.getContext("2d");
+
+  // Background
+  const gradient = ctx.createLinearGradient(0, 0, 1200, 627);
+  gradient.addColorStop(0, "#101828");
+  gradient.addColorStop(1, "#1d4ed8");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Decorative circles
+  ctx.globalAlpha = 0.12;
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.arc(1080, 100, 240, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(100, 600, 180, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Brand
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 42px Arial, sans-serif";
+  ctx.fillText("CareerMatch", 80, 100);
+
+  ctx.fillStyle = "#bfdbfe";
+  ctx.font = "28px Arial, sans-serif";
+  ctx.fillText("MY RÉSUMÉ MATCH SCORE", 80, 170);
+
+  // Score
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 170px Arial, sans-serif";
+  ctx.fillText(score, 80, 365);
+
+  // Candidate name
+  ctx.fillStyle = "#e0e7ff";
+  ctx.font = "32px Arial, sans-serif";
+  ctx.fillText(
+    name && name !== "Your résumé" ? `Prepared by ${name}` : "Prepared for my next opportunity",
+    80,
+    440
+  );
+
+  // Website link
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "26px Arial, sans-serif";
+  ctx.fillText(
+    "resume-interview-analyzer.pratyushk824-786.workers.dev",
+    80,
+    550
+  );
+
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        resolve(blob);
+      } else {
+        reject(new Error("Could not create the score card image."));
+      }
+    }, "image/png");
+  });
+}
+
+async function downloadScoreCard() {
+  const blob = await createScoreCardBlob();
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "careermatch-score-card.png";
+  document.body.append(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+const downloadScoreCardButton = $("downloadScoreCard");
+
+if (downloadScoreCardButton) {
+  downloadScoreCardButton.addEventListener("click", async () => {
+    try {
+      await downloadScoreCard();
+      $("status").textContent =
+        "Your CareerMatch score card has been downloaded.";
+    } catch (error) {
+      $("status").textContent = error.message;
+    }
+  });
+}
+
 const shareLinkedInButton = $("shareLinkedIn");
 
 if (shareLinkedInButton) {
-  shareLinkedInButton.addEventListener("click", () => {
-    const shareUrl = `${window.location.origin}${window.location.pathname}`;
+  shareLinkedInButton.addEventListener("click", async () => {
+    try {
+      // Downloads the branded image first.
+      await downloadScoreCard();
 
-    window.open(
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
-      "_blank",
-      "noopener,noreferrer,width=600,height=600"
-    );
+      $("status").textContent =
+        "Your score card was downloaded. Attach it to your LinkedIn post.";
+
+      const websiteUrl =
+        "https://resume-interview-analyzer.pratyushk824-786.workers.dev/";
+
+      window.open(
+        `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(websiteUrl)}`,
+        "_blank",
+        "noopener,noreferrer,width=600,height=600"
+      );
+    } catch (error) {
+      $("status").textContent = error.message;
+    }
   });
 }
 
