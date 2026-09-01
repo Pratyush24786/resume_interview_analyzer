@@ -4,71 +4,30 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
 
 const $ = (id) => document.getElementById(id);
-
 const MAX_SIZE = 5 * 1024 * 1024;
 
 const SKILLS = {
   Programming: [
-    "Python",
-    "JavaScript",
-    "TypeScript",
-    "Java",
-    "C++",
-    "C#",
-    "SQL",
-    "HTML",
-    "CSS",
-    "React",
-    "Node.js",
-    "Flask",
-    "Django",
-    "Git",
-    "REST API"
+    "Python", "JavaScript", "TypeScript", "Java", "C++", "C#",
+    "SQL", "HTML", "CSS", "React", "Node.js", "Flask",
+    "Django", "Git", "REST API"
   ],
   "Data & AI": [
-    "Excel",
-    "Power BI",
-    "Tableau",
-    "Pandas",
-    "NumPy",
-    "Machine Learning",
-    "Data Analysis",
-    "Data Visualization",
-    "Statistics",
-    "TensorFlow",
-    "PyTorch"
+    "Excel", "Power BI", "Tableau", "Pandas", "NumPy",
+    "Machine Learning", "Data Analysis", "Data Visualization",
+    "Statistics", "TensorFlow", "PyTorch"
   ],
   "Cloud & DevOps": [
-    "AWS",
-    "Azure",
-    "Google Cloud",
-    "Docker",
-    "Kubernetes",
-    "CI/CD",
-    "Jenkins",
-    "Linux",
-    "Terraform"
+    "AWS", "Azure", "Google Cloud", "Docker", "Kubernetes",
+    "CI/CD", "Jenkins", "Linux", "Terraform"
   ],
   Business: [
-    "Project Management",
-    "Agile",
-    "Scrum",
-    "Stakeholder Management",
-    "Business Analysis",
-    "Salesforce",
-    "CRM",
-    "SEO",
-    "Digital Marketing"
+    "Project Management", "Agile", "Scrum", "Stakeholder Management",
+    "Business Analysis", "Salesforce", "CRM", "SEO", "Digital Marketing"
   ],
   "People skills": [
-    "Communication",
-    "Leadership",
-    "Teamwork",
-    "Problem Solving",
-    "Time Management",
-    "Presentation",
-    "Negotiation",
-    "Adaptability"
+    "Communication", "Leadership", "Teamwork", "Problem Solving",
+    "Time Management", "Presentation", "Negotiation", "Adaptability"
   ]
 };
 
@@ -206,17 +165,13 @@ function analyse(resume, job) {
     "Tell me about feedback you received and how it changed your approach."
   ];
 
-  if (
-    resumeSkills.some((skill) => SKILLS.Programming.includes(skill))
-  ) {
+  if (resumeSkills.some((skill) => SKILLS.Programming.includes(skill))) {
     questions.push(
       "How would you test, debug, and improve a feature you built?"
     );
   }
 
-  if (
-    resumeSkills.some((skill) => SKILLS["Data & AI"].includes(skill))
-  ) {
+  if (resumeSkills.some((skill) => SKILLS["Data & AI"].includes(skill))) {
     questions.push(
       "How do you make sure an analysis is accurate and useful?"
     );
@@ -288,11 +243,7 @@ function showReport(data, fileName) {
     skillBox.append(group);
   });
 
-  listItems(
-    "questions",
-    data.questions,
-    "Prepare a short STAR story."
-  );
+  listItems("questions", data.questions, "Prepare a short STAR story.");
 
   listItems(
     "achievements",
@@ -316,6 +267,7 @@ function showReport(data, fileName) {
       data.score >= 70
         ? "Strong starting match"
         : "Clear areas to strengthen";
+
     $("scoreText").textContent =
       `${data.matched.length} of ${data.jobSkills.length} recognised job skills ` +
       "appear in your résumé.";
@@ -365,7 +317,6 @@ $("analysisForm").addEventListener("submit", async (event) => {
   try {
     const resume = await readResume(file);
 
-    // Fixed: \n keeps this as one valid JavaScript string.
     if (resume.trim().length < 30) {
       throw new Error(
         "This file does not contain enough readable text.\nA scanned PDF may need OCR."
@@ -391,6 +342,20 @@ $("startOver").addEventListener("click", () => {
 });
 
 $("printReport").addEventListener("click", () => window.print());
+
+const shareLinkedInButton = $("shareLinkedIn");
+
+if (shareLinkedInButton) {
+  shareLinkedInButton.addEventListener("click", () => {
+    const shareUrl = `${window.location.origin}${window.location.pathname}`;
+
+    window.open(
+      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
+      "_blank",
+      "noopener,noreferrer,width=600,height=600"
+    );
+  });
+}
 
 $("year").textContent = new Date().getFullYear();
 
