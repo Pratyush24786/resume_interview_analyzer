@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
@@ -10,15 +11,23 @@
   </url>
 
   <url>
-    <loc>https://resume-interview-analyzer.pratyushk824-786.workers.dev/interview-questions.html</loc>
-  </url>
-
-  <url>
     <loc>https://resume-interview-analyzer.pratyushk824-786.workers.dev/resume-tips.html</loc>
   </url>
 
   <url>
+    <loc>https://resume-interview-analyzer.pratyushk824-786.workers.dev/interview-questions.html</loc>
+  </url>
+
+  <url>
     <loc>https://resume-interview-analyzer.pratyushk824-786.workers.dev/faq.html</loc>
+  </url>
+
+  <url>
+    <loc>https://resume-interview-analyzer.pratyushk824-786.workers.dev/privacy.html</loc>
+  </url>
+
+  <url>
+    <loc>https://resume-interview-analyzer.pratyushk824-786.workers.dev/ats-resume-checker.html</loc>
   </url>
 
 </urlset>
