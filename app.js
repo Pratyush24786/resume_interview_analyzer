@@ -5,6 +5,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 
 const $ = (id) => document.getElementById(id);
 const MAX_SIZE = 5 * 1024 * 1024;
+let cleanResumeText = "";
 
 const SKILLS = {
   Programming: [
@@ -244,6 +245,7 @@ function showReport(data, fileName) {
   });
 
   listItems("questions", data.questions, "Prepare a short STAR story.");
+  renderEnhancements(data, cleanResumeText);
 
   listItems(
     "achievements",
@@ -296,6 +298,140 @@ function showReport(data, fileName) {
   });
 }
 
+const ATS_PROFILES = {
+  workday: { name: "Workday-style", emphasis: "contact details, work history, and skill fields" },
+  greenhouse: { name: "Greenhouse-style", emphasis: "clean headings, dates, and chronological experience" },
+  lever: { name: "Lever-style", emphasis: "plain-text experience and role keywords" },
+  sap: { name: "SAP SuccessFactors-style", emphasis: "structured profile fields and consistent dates" }
+};
+
+function escapeHtml(value) {
+  const node = document.createElement("span");
+  node.textContent = value;
+  return node.innerHTML;
+}
+
+function scoreForText(text, skills) {
+  if (!skills.length) return null;
+  return Math.round((skills.filter((skill) => hasSkill(text, skill)).length / skills.length) * 100);
+}
+
+function renderKeywordOptimizer(data, resume) {
+  const editor = $("resumeEditor");
+  editor.value = resume;
+  const update = () => {
+    const current = editor.value;
+    const score = scoreForText(current, data.jobSkills);
+    $("liveScore").textContent = score === null
+      ? "Add a job description to activate the live score."
+      : `Live match: ${score}% — based on recognised job skills.`;
+    const list = $("keywordChecklist");
+    list.replaceChildren();
+    (data.jobSkills.length ? data.jobSkills : ["Add a job description to see target skills."]).forEach((skill) => {
+      const item = document.createElement("li");
+      const present = hasSkill(current, skill);
+      item.className = present ? "complete" : "";
+      item.textContent = `${present ? "✓" : "○"} ${skill}`;
+      list.append(item);
+    });
+  };
+  editor.oninput = update;
+  update();
+}
+
+function weakResumeBullets(resume) {
+  return resume.split(/\r?\n/)
+    .map((line) => line.trim().replace(/^[•*-]\s*/, ""))
+    .filter((line) => line.length > 24 && /\b(responsible for|worked on|helped|handled|managed|participated|assisted)\b/i.test(line))
+    .slice(0, 3);
+}
+
+function rewriteOptions(bullet) {
+  const topic = bullet.replace(/^(responsible for|worked on|helped with|handled|managed|participated in|assisted with)\s*/i, "").replace(/[.]+$/, "");
+  return [
+    `Spearheaded ${topic}, improving [key outcome] by [X%] through [specific action].`,
+    `Led [scope/team] to deliver ${topic}, resulting in [measurable result] within [timeframe].`,
+    `Partnered with [stakeholders] to improve ${topic}; tracked [metric] and achieved [result].`
+  ];
+}
+
+function renderRewriter(resume) {
+  const host = $("weakBullets");
+  const results = $("rewriteResults");
+  const bullets = weakResumeBullets(resume);
+  host.replaceChildren();
+  results.replaceChildren();
+  if (!bullets.length) {
+    host.textContent = "No common weak phrasing was detected. Choose any résumé bullet above and add a specific action, scope, and result.";
+    return;
+  }
+  bullets.forEach((bullet) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "weak-bullet";
+    button.textContent = `Generate improvement: “${bullet}”`;
+    button.addEventListener("click", () => {
+      results.innerHTML = `<p><strong>Original:</strong> ${escapeHtml(bullet)}</p>` + rewriteOptions(bullet)
+        .map((option) => `<label class="rewrite-option"><textarea rows="3">${escapeHtml(option)}</textarea></label>`).join("");
+    });
+    host.append(button);
+  });
+}
+
+function parsingRisks(resume) {
+  const lines = resume.split(/\r?\n/).filter((line) => line.trim());
+  const email = resume.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0] || "Not detected";
+  const phone = resume.match(/(?:\+?\d[\d\s().-]{7,}\d)/)?.[0] || "Not detected";
+  const risks = [];
+  if (email === "Not detected") risks.push("No email address was detected in the text.");
+  if (phone === "Not detected") risks.push("No phone number was detected in the text.");
+  if (/\t| {4,}|\|/.test(resume)) risks.push("Columns, tabs, or table-like spacing may change reading order.");
+  if (lines.some((line) => line.length > 180)) risks.push("Very long lines can make headings and bullet boundaries unclear.");
+  if (!/\b(experience|employment|work history)\b/i.test(resume)) risks.push("A conventional Experience heading was not detected.");
+  return { email, phone, risks };
+}
+
+function renderAtsPreview(resume, profileKey = "workday") {
+  const profile = ATS_PROFILES[profileKey];
+  const { email, phone, risks } = parsingRisks(resume);
+  const sample = resume.split(/\r?\n/).filter(Boolean).slice(0, 14).join("\n");
+  $("atsParsedPreview").innerHTML = `
+    <div><strong>${profile.name} educational preview</strong><p class="muted">Prioritises ${profile.emphasis}. This does not replicate or access a real vendor system.</p>
+      <dl><dt>Email</dt><dd>${escapeHtml(email)}</dd><dt>Phone</dt><dd>${escapeHtml(phone)}</dd></dl>
+      <h4>Plain-text extraction</h4><pre>${escapeHtml(sample || "No résumé text available.")}</pre></div>
+    <div><h4>Format risks to review</h4><ul>${(risks.length ? risks : ["No obvious text-format risks detected. Use clear headings and simple one-column formatting for best portability."]).map((risk) => `<li>${escapeHtml(risk)}</li>`).join("")}</ul></div>`;
+}
+
+function renderFlashcards(questions) {
+  const host = $("flashcards");
+  host.replaceChildren();
+  questions.slice(0, 4).forEach((question, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "flashcard";
+    card.setAttribute("aria-pressed", "false");
+    card.innerHTML = `<span class="flashcard-front"><b>Question ${index + 1}</b>${escapeHtml(question)}<small>Click for an answering framework</small></span><span class="flashcard-back"><b>STAR framework</b><span><strong>Situation:</strong> set context. <strong>Task:</strong> name your responsibility. <strong>Action:</strong> explain your choices. <strong>Result:</strong> quantify what changed.</span><small>Click to return to the question</small></span>`;
+    card.addEventListener("click", () => {
+      const flipped = card.classList.toggle("flipped");
+      card.setAttribute("aria-pressed", String(flipped));
+    });
+    host.append(card);
+  });
+}
+
+function renderEnhancements(data, resume) {
+  renderKeywordOptimizer(data, resume);
+  renderRewriter(resume);
+  renderFlashcards(data.questions);
+  renderAtsPreview(resume);
+  document.querySelectorAll(".ats-tab").forEach((tab) => {
+    tab.onclick = () => {
+      document.querySelectorAll(".ats-tab").forEach((item) => item.classList.toggle("active", item === tab));
+      renderAtsPreview($("resumeEditor").value, tab.dataset.ats);
+    };
+  });
+}
+
 $("analysisForm").addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -323,7 +459,8 @@ $("analysisForm").addEventListener("submit", async (event) => {
       );
     }
 
-    showReport(analyse(resume, $("jobDescription").value), file.name);
+    cleanResumeText = resume.replace(/\u00a0/g, " ");
+    showReport(analyse(cleanResumeText, $("jobDescription").value), file.name);
     $("status").textContent = "";
   } catch (error) {
     $("status").textContent =

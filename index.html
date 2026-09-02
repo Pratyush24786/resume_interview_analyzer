@@ -290,6 +290,42 @@
 
     </section>
 
+    <section class="card wide" id="keywordOptimizer">
+      <p class="eyebrow">LIVE EDIT MODE</p>
+      <h3>Close your keyword gaps truthfully</h3>
+      <p class="muted">Edit a working copy of your résumé. A skill only counts when it is genuinely part of your experience.</p>
+      <div class="live-editor">
+        <label for="resumeEditor">Your editable résumé text</label>
+        <textarea id="resumeEditor" rows="15" spellcheck="true"></textarea>
+        <aside>
+          <strong>Keyword checklist</strong>
+          <p id="liveScore" class="muted"></p>
+          <ul id="keywordChecklist" class="keyword-checklist"></ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="card wide" id="impactRewriter">
+      <p class="eyebrow">IMPACT &amp; QUANTIFIABLE METRICS</p>
+      <h3>Rewrite a weak bullet with a STAR structure</h3>
+      <p class="muted">These are writing prompts, not facts. Replace every bracketed placeholder with evidence you can support.</p>
+      <div id="weakBullets" class="weak-bullets"></div>
+      <div id="rewriteResults" class="rewrite-results" aria-live="polite"></div>
+    </section>
+
+    <section class="card wide" id="atsPreview">
+      <p class="eyebrow">FORMAT-RISK PREVIEW</p>
+      <h3>Common parsing risks in ATS-style applications</h3>
+      <p class="muted">This is an educational simulation, not a view of any proprietary system. It highlights common risks that can affect Workday-style, Greenhouse-style, Lever-style, and SAP SuccessFactors-style application forms.</p>
+      <div class="ats-tabs" role="tablist" aria-label="ATS-style parsing previews">
+        <button type="button" class="ats-tab active" data-ats="workday" role="tab">Workday-style</button>
+        <button type="button" class="ats-tab" data-ats="greenhouse" role="tab">Greenhouse-style</button>
+        <button type="button" class="ats-tab" data-ats="lever" role="tab">Lever-style</button>
+        <button type="button" class="ats-tab" data-ats="sap" role="tab">SAP SuccessFactors-style</button>
+      </div>
+      <div id="atsParsedPreview" class="ats-preview" aria-live="polite"></div>
+    </section>
+
     <section class="card">
 
       <h3>
@@ -307,6 +343,8 @@
       </h3>
 
       <ol id="questions"></ol>
+
+      <div id="flashcards" class="flashcards" aria-live="polite"></div>
 
     </section>
 
@@ -515,6 +553,18 @@
   </div>
 
   <div class="resource-links">
+
+    <a href="software-engineer-resume-analyzer.html">
+      Software engineer ATS checker <span>→</span>
+    </a>
+
+    <a href="data-scientist-resume-analyzer.html">
+      Data scientist résumé review <span>→</span>
+    </a>
+
+    <a href="management-consultant-resume-analyzer.html">
+      Management consultant résumé analyzer <span>→</span>
+    </a>
 
     <a href="interview-questions.html">
       Interview question generator <span>→</span>
