@@ -1,27 +1,68 @@
-# CareerMatch Pro — GitHub Pages product
+# 🚀 CareerMatch — Free Resume & Job Match Analyzer
 
-A free-to-host résumé and job-description matching website. It runs fully in the browser: résumé files are not uploaded to a server.
+### 🎯 Match your resume with any job description and discover what you're missing.
 
-## Publish on GitHub Pages
+[🌐 Try CareerMatch Free](https://resume-interview-analyzer.pratyushk824-786.workers.dev/)
 
-1. Create a **public** GitHub repository, for example `careermatch`.
-2. Upload all files from this folder to the repository root. Do not upload the ZIP itself.
-3. Open **Settings → Pages**.
-4. Select **Deploy from a branch**, then `main` and `/ (root)`; alternatively, put these files in a `docs` folder and choose `/docs`.
-5. Click **Save** and wait a few minutes for the site address.
+CareerMatch analyzes your resume against a job description and helps you
+identify matching skills, missing skills, important keywords, resume
+improvements, and interview preparation topics.
 
-## How to start earning
+## ✨ Features
 
-1. First test the website with real users and collect feedback.
-2. Offer a paid service such as a personal résumé review or mock interview, rather than selling automated results that may be inaccurate.
-3. Open `config.js`, add your own verified payment, booking, WhatsApp, or email link to `personalisedHelpUrl`, and upload the changed file. The "Want a human review?" offer will then appear in every report.
-4. Before accepting résumés from others, publish a privacy policy and add your business contact details.
+- 📄 Resume analysis
+- 🎯 Job description matching
+- ✅ Matching skills
+- ❌ Missing skills
+- 🔑 Important keywords
+- 📝 Resume improvement suggestions
+- 🎤 Interview preparation
+- 🔒 Privacy-focused browser processing
+- 🆓 Free to use
 
-## Important limits
+## 🌐 Live Demo
 
-- The score is a simple skill-keyword comparison, not a hiring decision or ATS guarantee.
-- Scanned/image-only PDFs need OCR before their text can be read.
-- A static GitHub Pages site cannot safely run its own payment system, user accounts, or private database. Use a verified payment/booking provider for those tasks.
+👉 **[Try CareerMatch](https://resume-interview-analyzer.pratyushk824-786.workers.dev/)**
+
+## 🖥️ How It Works
+
+1. Upload your resume
+2. Paste the job description
+3. Analyze the match
+4. Discover missing skills and keywords
+5. Prepare for your interview
+
+## 📸 Screenshots
+
+<!-- Add screenshots here -->
+
+## 💡 Why CareerMatch?
+
+Instead of blindly applying to jobs, CareerMatch helps you understand:
+
+- How well your resume matches a specific job
+- Which skills you're missing
+- Which keywords matter
+- What areas you should improve
+- What you should prepare for in an interview
+
+## 🛠️ Tech Stack
+
+- HTML
+- CSS
+- JavaScript
+- [Add your actual backend/AI technologies here]
+
+## 🚀 Try It
+
+**Free Resume & Job Match Analyzer:**
+
+https://resume-interview-analyzer.pratyushk824-786.workers.dev/
+
+## ⭐ Support
+
+If you find CareerMatch useful, consider giving this repository a ⭐
+and sharing it with someone currently looking for a job.
 <img width="900" height="900" alt="download" src="https://github.com/user-attachments/assets/5e594cff-99ad-4645-bc25-dc5d836f0106" />
 <img width="1560" height="955" alt="Screenshot 2026-09-03 225612" src="https://github.com/user-attachments/assets/dd6017a7-370e-4da0-942a-798a6a5623f2" />
 <img width="1552" height="678" alt="Screenshot 2026-09-03 225549" src="https://github.com/user-attachments/assets/96cfedd1-6d0a-4d22-b278-87afe7d00952" />
