@@ -362,18 +362,24 @@
             <div class="field">
               <label for="resume"><b>01</b> Choose your resume</label>
               <input id="resume" type="file" accept=".pdf,.docx,.txt" required>
-              <small>PDF, DOCX or TXT · Maximum file size: 5 MB</small>
+              <small>PDF, DOCX or TXT. Maximum file size: 5 MB.</small>
             </div>
-
+          
             <div class="field">
-              <label for="jobDescription"><b>02</b> Paste the job description <em>(recommended)</em></label>
-              <textarea id="jobDescription" rows="7" placeholder="Paste the role requirements and responsibilities here…"></textarea>
+              <label for="jobDescription">
+                <b>02</b> Paste the job description <em>(recommended)</em>
+              </label>
+              <textarea
+                id="jobDescription"
+                rows="7"
+                placeholder="Paste the job requirements and responsibilities here..."
+              ></textarea>
             </div>
-
-            <button class="submit-button" id="analyzeButton" type="submit">
-              Create my free report <span aria-hidden="true">→</span>
+          
+            <button id="analyzeButton" type="submit">
+              Create my free report
             </button>
-            <p id="status" class="status" aria-live="polite"></p>
+            <p id="status" aria-live="polite"></p>
           </form>
         </div>
 
