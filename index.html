@@ -360,26 +360,34 @@
 
           <form id="analysisForm">
             <div class="field">
-              <label for="resume"><b>01</b> Choose your resume</label>
-              <input id="resume" type="file" accept=".pdf,.docx,.txt" required>
-              <small>PDF, DOCX or TXT. Maximum file size: 5 MB.</small>
+              <label for="resume">
+                <b>01</b> Upload résumé
+              </label>
+              <input
+                id="resume"
+                type="file"
+                accept=".pdf,.docx,.txt"
+                required
+              >
+              <small>
+                Maximum file size: 5 MB
+              </small>
             </div>
-          
             <div class="field">
               <label for="jobDescription">
-                <b>02</b> Paste the job description <em>(recommended)</em>
+                <b>02</b> Paste job description
+                <em>(recommended)</em>
               </label>
               <textarea
                 id="jobDescription"
-                rows="7"
-                placeholder="Paste the job requirements and responsibilities here..."
+                rows="8"
+                placeholder="Paste the job requirements, responsibilities, and desired skills here…"
               ></textarea>
             </div>
-          
             <button id="analyzeButton" type="submit">
-              Create my free report
+              Create my career report <span>→</span>
             </button>
-            <p id="status" aria-live="polite"></p>
+            <p id="status" class="status" aria-live="polite"></p>
           </form>
         </div>
 
