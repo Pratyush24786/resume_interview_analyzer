@@ -375,6 +375,26 @@ nav { border-bottom-color: rgba(212, 221, 236, .8); }
 }
 .benefits article { border-top: 3px solid #3157d5; }
 .benefits .icon, .steps article b { color: #3157d5; }
+.how-title { display: block; width: 100%; margin: 0 auto 34px; text-align: center; }
+.how-title .eyebrow {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 7px 12px;
+  border: 1px solid #dbe4ff;
+  border-radius: 999px;
+  background: #edf2ff;
+  color: #3157d5;
+  font-size: 11px;
+  letter-spacing: .14em;
+}
+.how-title h2 {
+  max-width: none;
+  margin: 0;
+  white-space: nowrap;
+  font-size: clamp(30px, 3.5vw, 40px);
+  line-height: 1.15;
+}
+.how-title h2 em { color: #3157d5; font-style: normal; }
 .steps article:nth-child(2), .steps article:nth-child(3) { background: #fff; }
 .methodology { background: linear-gradient(135deg, #fff, #f5f7ff); }
 .methodology-steps li::before { color: #3157d5; }
@@ -406,6 +426,7 @@ footer a { color: #3157d5; }
   .preview-card { max-width: 100%; }
   .analyzer { padding: 24px; border-radius: 19px; }
   .benefits article, .steps article, .match-guide-grid article { padding: 20px; }
+  .how-title h2 { white-space: normal; }
 }
 @media (max-width: 540px) {
   .shell { width: min(100% - 24px, 1180px); }
