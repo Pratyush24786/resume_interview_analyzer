@@ -292,9 +292,9 @@ function showReport(data, fileName) {
   $("analyzer").classList.add("hidden");
   $("report").classList.remove("hidden");
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+  $("report").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
   });
 }
 
