@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Free Resume Analyzer & ATS Resume Checker | CareerMatch</title>
+<title>Free Resume Analyzer & ATS Checker | CareerMatch</title>
 
-<meta name="description" content="Free resume analyzer and ATS resume checker. Compare your resume with a job description, find missing skills and keywords, improve your resume, and prepare for interviews.">
+<meta name="description" content="Analyze your resume against a job description with CareerMatch. Find matching skills, review keyword gaps, and practise interview questions privately in your browser.">
 
 <meta name="robots" content="index, follow">
 
@@ -440,6 +440,73 @@
       .hero { padding: 25px 20px; }
       .hero h1 { font-size: 2.5rem; }
       .report-head, .closing, footer { flex-direction: column; }
+    }
+  
+    /* Polished visual layer */
+    html { scroll-behavior: smooth; scroll-padding-top: 18px; }
+    body { margin: 0; background: linear-gradient(180deg, #f7f9ff 0, #f5f7fb 48rem); }
+    nav { position: relative; }
+    .nav-links a { transition: color .18s ease, background .18s ease, transform .18s ease; }
+    .nav-links .nav-cta { box-shadow: 0 8px 20px rgba(23, 32, 51, .14); }
+    .nav-links .nav-cta:hover { background: var(--cm-blue); color: #fff; transform: translateY(-1px); }
+    .hero { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.9); }
+    .hero h1 { margin: 12px 0 18px; }
+    .hero-copy .lead { line-height: 1.75; }
+    .trust { display: flex; flex-wrap: wrap; gap: 10px; }
+    .trust span { padding: 6px 10px; border: 1px solid #e8ecf5; border-radius: 999px; background: rgba(255,255,255,.72); }
+    .preview-card { border-color: #e8edfa; transform: rotate(0); transition: transform .25s ease, box-shadow .25s ease; }
+    .preview-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(38,57,103,.18); }
+    .mini-logo { font-weight: 800; letter-spacing: -.03em; }
+    .pill { padding: 4px 10px; border-radius: 99px; background: #e7f7ef; color: #176847; font-size: .8rem; font-weight: 750; }
+    .preview-label { margin: 24px 0 10px; color: var(--cm-muted); font-size: .75rem; font-weight: 800; letter-spacing: .12em; }
+    .preview-line { margin: 18px 0 8px; font-size: .92rem; }
+    .bar { height: 9px; overflow: hidden; border-radius: 99px; background: #e8ecf5; }
+    .bar i { display: block; width: 78%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #3157d5, #48b79a); }
+    .analyzer { scroll-margin-top: 18px; }
+    .field input, .field textarea { transition: border-color .18s ease, box-shadow .18s ease; }
+    .field input:hover, .field textarea:hover { border-color: #aebce9; }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid rgba(49,87,213,.4); outline-offset: 3px; }
+    #analyzeButton { min-height: 48px; box-shadow: 0 10px 22px rgba(49,87,213,.2); }
+    .outline, .text-button, .linkedin-share, .ats-tab { transition: border-color .18s ease, color .18s ease, background .18s ease, transform .18s ease; }
+    .report .card, .benefits article, .steps article, .resource-links a { box-shadow: 0 8px 24px rgba(27,42,78,.035); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .benefits article:hover, .steps article:hover, .resource-links a:hover { transform: translateY(-3px); border-color: #cbd5f1; box-shadow: 0 14px 32px rgba(27,42,78,.08); }
+    .benefits .icon { display: inline-grid; width: 42px; height: 42px; place-items: center; border-radius: 13px; background: #edf1ff; color: var(--cm-blue); font-size: 1.25rem; }
+    .steps article b { display: inline-grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; background: #edf1ff; }
+    .resource-promo { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: start; }
+    .resource-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .resource-links a { display: flex; justify-content: space-between; gap: 12px; }
+    .closing { padding: 28px; border: 1px solid #e6eaf4; border-radius: 20px; background: linear-gradient(120deg, #fff, #f0f3ff); }
+    footer { border-top: 1px solid var(--cm-line); }
+    .live-editor { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(220px, .7fr); gap: 18px; }
+    .live-editor textarea { width: 100%; min-height: 240px; padding: 13px; border: 1px solid #d9dfeb; border-radius: 11px; font: inherit; }
+    .live-editor aside { padding: 16px; border-radius: 12px; background: #f7f8fc; }
+    .ats-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .ats-tab { padding: 8px 12px; border: 1px solid var(--cm-line); border-radius: 999px; background: #fff; cursor: pointer; }
+    .ats-tab.active, .ats-tab:hover { border-color: var(--cm-blue); background: #edf1ff; color: var(--cm-blue); }
+    .ats-preview, .weak-bullets, .rewrite-results, .flashcards { margin-top: 14px; }
+    .keyword-checklist { padding-left: 20px; }
+    #report { scroll-margin-top: 18px; }
+    @media (max-width: 760px) {
+      .resource-promo { grid-template-columns: 1fr; }
+      .live-editor { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      nav { flex-direction: column; align-items: stretch; }
+      .nav-links { justify-content: flex-start; }
+      .hero h1 { font-size: clamp(2.25rem, 11vw, 3rem); }
+      .resource-links { grid-template-columns: 1fr; }
+      .score-card, .feedback { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+    @media print {
+      body { background: #fff; }
+      nav, .hero, .analyzer, .benefits, .how, .resource-promo, .closing, footer, .actions { display: none !important; }
+      #report { display: block !important; border: 0; box-shadow: none; }
+      #report .card { break-inside: avoid; box-shadow: none; }
     }
   </style>
 
