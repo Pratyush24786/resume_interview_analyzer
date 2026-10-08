@@ -71,3 +71,25 @@ input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+/* Helpful landing-page content */
+.match-guide, .home-faq { padding: 78px 0 0; }
+.match-guide h2, .home-faq h2 { max-width: 760px; font: 700 clamp(32px, 4vw, 46px)/1.08 'Playfair Display', serif; letter-spacing: -.025em; margin: 0; }
+.match-guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 25px; }
+.match-guide-grid article { padding: 21px; border: 1px solid var(--line); background: var(--card); }
+.match-guide-grid h3 { font: 700 22px 'Playfair Display', serif; margin: 0 0 9px; }
+.match-guide-grid p, .faq-list p { color: var(--muted); line-height: 1.6; margin: 0; }
+.match-guide-link { margin: 20px 0 0; }
+.match-guide-link a, .faq-more { color: var(--teal); font-weight: 700; text-underline-offset: 4px; }
+.home-faq { display: grid; grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr); gap: 36px; padding-bottom: 55px; }
+.faq-list details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+.faq-list summary { cursor: pointer; font-weight: 700; line-height: 1.45; }
+.faq-list details p { padding-top: 10px; }
+.faq-more { grid-column: 2; justify-self: start; }
+.preview-card .pill { text-transform: uppercase; letter-spacing: .06em; }
+@media (max-width: 760px) {
+  .match-guide, .home-faq { padding-top: 55px; }
+  .match-guide-grid { grid-template-columns: 1fr; }
+  .home-faq { grid-template-columns: 1fr; gap: 18px; }
+  .faq-more { grid-column: 1; }
+}
