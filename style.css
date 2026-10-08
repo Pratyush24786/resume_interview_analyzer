@@ -186,3 +186,58 @@ footer { gap: 18px; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+/* Final interaction and responsive refinements */
+body { -webkit-font-smoothing: antialiased; }
+.shell { width: min(1180px, calc(100% - 40px)); }
+.logo { letter-spacing: -.04em; }
+.analyzer { width: 100%; max-width: 1000px; margin-inline: auto; }
+.field input[type="file"] {
+  min-height: 72px;
+  padding: 14px;
+  border: 1px dashed #a9c9bf;
+  background: #f7fbf9;
+  cursor: pointer;
+}
+.field input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 9px 13px;
+  border: 0;
+  border-radius: 8px;
+  background: #e2f1eb;
+  color: var(--teal);
+  font: 600 14px 'DM Sans', sans-serif;
+  cursor: pointer;
+}
+.field input[type="file"]::file-selector-button:hover { background: #d2e9df; }
+button, .primary-link, .offer-button { font-weight: 700; }
+button:active, .primary-link:active, .offer-button:active { transform: translateY(1px); }
+#analyzeButton { min-height: 54px; }
+.status { line-height: 1.5; }
+.report { padding-top: 48px; }
+.report-head { padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.score-card { border-radius: 18px; box-shadow: 0 8px 24px rgba(31, 70, 64, .05); }
+.score { box-shadow: 0 8px 20px rgba(9, 107, 104, .18); }
+.report .card { border-radius: 15px; }
+.report .tag { border-radius: 999px; }
+.ats-tab, .outline, .text-button { border-radius: 9px; }
+.ats-tab.active { box-shadow: 0 4px 12px rgba(9, 107, 104, .16); }
+.feedback { border-radius: 13px; }
+.feedback a { border-radius: 8px; }
+.benefits article { border-radius: 14px; }
+.steps article { border: 1px solid rgba(9, 107, 104, .08); border-radius: 15px; }
+.resource-promo { border-radius: 20px; }
+footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  .shell { width: min(100% - 28px, 1180px); }
+  .analyzer { margin-top: 26px; }
+  .report { padding-top: 34px; }
+  .feedback a { display: inline-block; }
+}
+@media (max-width: 540px) {
+  .nav-links .nav-cta { padding: 8px 10px; }
+  .hero-actions { align-items: flex-start; }
+  .primary-link { text-align: center; }
+  .actions > button { flex: 1 1 auto; }
+  footer div { flex-wrap: wrap; }
+}
