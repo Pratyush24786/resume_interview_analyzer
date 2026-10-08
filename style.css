@@ -73,6 +73,16 @@ input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-
 }
 
 /* Helpful landing-page content */
+.methodology { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.2fr); gap: 28px 55px; padding: 70px 34px; margin-top: 30px; background: #eef4ee; border: 1px solid #d5e1d8; }
+.methodology-intro h2 { font: 700 clamp(30px, 3.5vw, 42px)/1.08 'Playfair Display', serif; letter-spacing: -.025em; margin: 0; }
+.methodology-intro > p:last-child, .methodology-note { color: var(--muted); line-height: 1.65; }
+.methodology-steps { list-style: none; counter-reset: method; margin: 0; padding: 0; }
+.methodology-steps li { counter-increment: method; display: grid; grid-template-columns: 34px 1fr; gap: 0 12px; padding: 0 0 20px; }
+.methodology-steps li::before { content: '0' counter(method); grid-row: span 2; color: var(--teal); font: 12px 'DM Mono', monospace; padding-top: 3px; }
+.methodology-steps b { font-size: 16px; }
+.methodology-steps span { color: var(--muted); line-height: 1.55; margin-top: 4px; }
+.methodology-note { grid-column: 1 / -1; border-top: 1px solid #cbd8cf; padding-top: 17px; margin: 0; }
+.methodology-note a { color: var(--teal); font-weight: 700; }
 .match-guide, .home-faq { padding: 78px 0 0; }
 .match-guide h2, .home-faq h2 { max-width: 760px; font: 700 clamp(32px, 4vw, 46px)/1.08 'Playfair Display', serif; letter-spacing: -.025em; margin: 0; }
 .match-guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 25px; }
@@ -88,6 +98,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-
 .faq-more { grid-column: 2; justify-self: start; }
 .preview-card .pill { text-transform: uppercase; letter-spacing: .06em; }
 @media (max-width: 760px) {
+  .methodology { grid-template-columns: 1fr; padding: 32px 22px; gap: 20px; }
+  .methodology-note { grid-column: auto; }
   .match-guide, .home-faq { padding-top: 55px; }
   .match-guide-grid { grid-template-columns: 1fr; }
   .home-faq { grid-template-columns: 1fr; gap: 18px; }
